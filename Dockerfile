@@ -1,5 +1,9 @@
 
 
+ARG APP_PATH
+ARG APP_GROUP
+ARG APP_GEMSET
+
 
 RUN mkdir -p $APP_PATH
 
