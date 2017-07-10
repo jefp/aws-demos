@@ -11,6 +11,11 @@ COPY . $APP_PATH
 
 RUN groupadd -f $APP_GROUP
 
+RUN apt-add-repository -y ppa:rael-gc/rvm
+RUN apt-get update
+RUN apt-get install rvm
+
+
 RUN  if ! getent passwd $APP_USER > /dev/null 2>&1; then useradd -g $APP_GROUP $APP_USER -s /bin/bash ; fi
 
 RUN chown -R $APP_USER:$APP_GROUP $APP_PATH
@@ -22,7 +27,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y libpq-dev ssmtp c
 
 RUN echo "APP_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/01-$APP_USER
 
-RUN su - $APP_USER -c "curl -sSL https://get.rvm.io | bash -s stable"
 RUN su - $APP_USER -c "rvm install $RUBY_VERSION"
 RUN su - $APP_USER -c "rvm use $RUBY_VERSION && rvm gemset create $APPGEMSET"
 
