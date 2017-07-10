@@ -16,6 +16,12 @@ RUN  if ! getent passwd $APP_USER > /dev/null 2>&1; then useradd -g $APP_GROUP $
 RUN chown -R $APP_USER:$APP_GROUP $APP_PATH
 RUN rm -rf  $APP_PATH/logs/* $APP_PATH/tmp/* /tmp/*
 
+RUN apt-get update && apt-get upgrade -y && apt-get install -y libpq-dev ssmtp ca-certificates sudo dirmngr nodejs libcurl3 curl git iputils-ping nginx-extras vim net-tools telnet wget
+
+
+
+RUN echo "APP_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/01-$APP_USER
+
 RUN su - $APP_USER -c "curl -sSL https://get.rvm.io | bash -s stable"
 RUN su - $APP_USER -c "rvm install $RUBY_VERSION"
 RUN su - $APP_USER -c "rvm use $RUBY_VERSION && rvm gemset create $APPGEMSET"
