@@ -11,9 +11,7 @@ COPY . $APP_PATH
 
 RUN groupadd -f $APP_GROUP
 
-RUN apt-add-repository -y ppa:rael-gc/rvm
-RUN apt-get update
-RUN apt-get install rvm
+
 
 
 RUN  if ! getent passwd $APP_USER > /dev/null 2>&1; then useradd -g $APP_GROUP $APP_USER -s /bin/bash ; fi
@@ -23,6 +21,11 @@ RUN rm -rf  $APP_PATH/logs/* $APP_PATH/tmp/* /tmp/*
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y libpq-dev ssmtp ca-certificates sudo dirmngr nodejs libcurl3 curl git iputils-ping nginx-extras vim net-tools telnet wget
 
+RUN apt-get install -y  python-software-properties 
+
+RUN apt-add-repository -y ppa:rael-gc/rvm
+RUN apt-get update
+RUN apt-get install -y rvm
 
 
 RUN echo "APP_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/01-$APP_USER
