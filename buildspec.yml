@@ -9,12 +9,13 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - echo ENV vars $BASE_OS $BASE_OS_TAG $APP_PATH $APP_GROUP $APP_USER= $RUBY_VERSION $APPGEMSET
       - docker build  --build-arg  BASE_OS=$BASE_OS
-                      --build-arg  BASE_OS_TAG=BASE_OS_TAG
-                      --build-arg  APP_PATH=APP_PATH
-                      --build-arg  APP_GROUP=APP_GROUP
-                      --build-arg  APP_USER=APP_USER
-                      --build-arg  RUBY_VERSION=RUBY_VERSION
+                      --build-arg  BASE_OS_TAG=$BASE_OS_TAG
+                      --build-arg  APP_PATH=$APP_PATH
+                      --build-arg  APP_GROUP=$APP_GROUP
+                      --build-arg  APP_USER=$APP_USER
+                      --build-arg  RUBY_VERSION=$RUBY_VERSION
                       --build-arg  APPGEMSET=$APPGEMSET
                       -t $IMAGE_REPO_NAME .
 
