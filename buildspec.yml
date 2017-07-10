@@ -9,7 +9,15 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t $IMAGE_REPO_NAME .
+      - docker build -t $IMAGE_REPO_NAME .  --build-arg  BASE_OS=$BASE_OS\
+                                            --build-arg  BASE_OS_TAG=BASE_OS_TAG\
+                                            --build-arg  APP_PATH=APP_PATH\
+                                            --build-arg  APP_GROUP=APP_GROUP\
+                                            --build-arg  APP_USER=APP_USER\
+                                            --build-arg  RUBY_VERSION=RUBY_VERSION\
+                                            --build-arg  APPGEMSET=$APPGEMSET
+
+
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
