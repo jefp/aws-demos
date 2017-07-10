@@ -9,11 +9,12 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - echo ENV vars $BASE_OS $BASE_OS_TAG $APP_PATH $APP_GROUP $APP_USER= $RUBY_VERSION $APPGEMSET
+      - echo ENV vars $BASE_OS $BASE_OS_TAG $APP_PATH $APP_GROUP $APP_USER $RUBY_VERSION $APPGEMSET
       - echo -e "FROM $BASE_OS:$BASE_OS_TAG$\n$(cat Dockerfile)" > Dockerfile
+      - cat Dockerfile
       - docker build  --build-arg  APP_PATH=$APP_PATH
                       --build-arg  APP_USER=$APP_USER
-                      --build-arg  APPGEMSET=$APPGEMSET
+                      --build-arg  APP_GEMSET=$APP_GEMSET
                       -t $IMAGE_REPO_NAME .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
