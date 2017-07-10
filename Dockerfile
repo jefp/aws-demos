@@ -21,7 +21,7 @@ RUN rm -rf  $APP_PATH/logs/* $APP_PATH/tmp/* /tmp/*
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y libpq-dev ssmtp ca-certificates sudo dirmngr nodejs libcurl3 curl git iputils-ping nginx-extras vim net-tools telnet wget
 
-RUN apt-get install -y  python-software-properties 
+RUN apt-get install -y   software-properties-common python-software-properties
 
 RUN apt-add-repository -y ppa:rael-gc/rvm
 RUN apt-get update
