@@ -14,6 +14,8 @@ RUN chown -R $APP_USER:$APP_GROUP $APP_PATH
 
 RUN su - $APP_USER -c " cd $APP_PATH && rvm gemset use $APP_GEMSET && bundle install --without test development"
 
+RUN su - $APP_USER -c " cd $APP_PATH && rvm gemset use $APP_GEMSET && RAILS_ENV=production rake assets:precompile"
+
 RUN rm -rf  $APP_PATH/logs/* $APP_PATH/tmp/* /tmp/*
 
 #Remove any apt-get data
