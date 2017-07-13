@@ -11,7 +11,7 @@ So, after pushing a commit to the master branch of GitHub Repo, an automatic pro
 ## Installation
 
 This is a prototype demo using a rails apps for testing purpose.
-
+App Version 1.0
 ## License
 
 MIT License
