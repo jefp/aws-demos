@@ -26,4 +26,6 @@ USER $APP_USER
 
 WORKDIR $APP_PATH
 
-ENTRYPOINT ["rvm gemset use myapp && cd /mnt/myapp/ && SECRET_KEY_BASE=$SECRET_KEY_BASE puma -e production -v -w 2  -p 3000"]
+ENTRYPOINT ["/bin/bash", "--login","-c"]
+
+CMD ["rvm gemset use myapp && cd /mnt/myapp/ && SECRET_KEY_BASE=$SECRET_KEY_BASE puma -e production -v -w 2  -p 3000"]
