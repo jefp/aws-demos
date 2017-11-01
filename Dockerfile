@@ -28,4 +28,4 @@ WORKDIR $APP_PATH
 
 ENTRYPOINT ["/bin/bash", "--login","-c"]
 
-CMD ["rvm gemset use myapp && cd /mnt/myapp/ && SECRET_KEY_BASE=$SECRET_KEY_BASE puma -e production -v -w 2  -p 3000"]
+CMD ["rvm gemset use floyd && cd /mnt/myapp/ && SECRET_KEY_BASE=$SECRET_KEY_BASE puma -e production -v -w 2  -p 3000"]
